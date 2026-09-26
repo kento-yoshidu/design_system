@@ -9,5 +9,8 @@
     "tsBuildInfoFile": null
   },
   "include": ["src"],
-  "exclude": ["src/main.tsx"]
+  "exclude": [
+    "src/main.tsx",
+    "src/App.tsx"
+  ]
 }

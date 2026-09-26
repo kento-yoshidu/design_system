@@ -30,6 +30,10 @@ UFO Studio（Tauri）とUFO Playground（WASM）で同じUIを使うための、
 - [x] `pnpm build`で`dist/`にJS・`style.css`・型定義が出ることを確認する
 - [x] Studioから表示できることを確認する（手順はStudio側`docs/ROADMAP.md`の「UI共通化」）。`pnpm tauri dev`に加え、`pnpm tauri build`でビルドしたアプリをWindowsにインストールし、`useState`・CSS Modules・CSS変数が効くことを確認済み
 - [ ] Playgroundから表示できることを確認する（手順はPlayground側`docs/ROADMAP.md`の「Phase 1」）
+- [ ] git依存で配布できるようにする（方針は`CLAUDE.md`の「配布方法」）
+  - [ ] `.gitignore`から`dist`を外し、ビルド済みの`dist/`をコミットする
+  - [ ] `.gitattributes`に`dist/** linguist-generated`を書き、GitHubの差分表示で折りたたまれるようにする
+  - [ ] （任意）CIで`pnpm build`を実行し、`git diff --exit-code dist`で`dist/`の更新漏れを検出する
 - [ ] 開発中の反映方法を決める: `dist/`を参照する形だと、変更のたびにビルドし直しが要る。`vite build --watch`を動かしておく運用で困らないかを試す
 - [ ] 本物のコンポーネントを移し終えたら、ダミーコンポーネントは削除する
 
@@ -56,5 +60,4 @@ UFO Studio（Tauri）とUFO Playground（WASM）で同じUIを使うための、
 
 ## 検討事項（未定）
 
-- **配布方法**: ローカル開発では`link:`で参照する。CIでビルドする段階でgit依存かnpm公開に切り替える（詳細は`CLAUDE.md`の「未決定事項」）
 - **コンポーネントカタログ**: Storybookなどを入れるかは、コンポーネントが増えてから考える。当面は`pnpm dev`の確認用ページで足りる想定
