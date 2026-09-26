@@ -21,10 +21,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **スタイル**: CSS Modules + `:root`のCSS変数（デザイントークン）。ビルド後のCSSは利用側で`import "ufodb-design-system/style.css"`のように読み込んでもらう
 - 当初のコンポーネントとトークンはStudioの`src/components/`・`src/App.css`から切り出したもの。切り出し後はStudioを正とせず、このリポジトリを正とする
 
+## 配布方法
+
+- **ビルド済みの`dist/`をコミットし、利用側はgit依存で参照する**（リポジトリはpublicなので認証不要）。インストール時に`prepare`でビルドさせる方式は、pnpmの挙動確認やインストールの重さが気になるため採らない。npm公開は、バージョン管理の手間に見合うようになったら検討する。GitHub Packagesはpublicなパッケージでもインストールに認証が必要なため避ける
+- **`src/`を変更したら、`pnpm build`してから`dist/`と一緒にコミットする**。ビルドし忘れると、利用側には古い`dist/`が届く
+- 利用側は`"ufodb-design-system": "github:kento-yoshidu/ufodb_design_system"`のように`#<タグ/コミット>`なしで参照してよい。インストール時のコミットが利用側の`pnpm-lock.yaml`に記録されて固定され、`pnpm update ufodb-design-system`で最新に更新する
+- ローカル開発中は、利用側から`link:`で参照してもよい
+
 ## 未決定事項
 
 - **状態管理ロジックの置き場所**: Studioの`Contents.tsx`にあるような状態管理（groupsの再取得など）を、各アプリで書くか、`UfdbBackend`インターフェース + `useUfdb(backend)`のようなhookとしてこのリポジトリ（または別パッケージ）に置くか
-- **配布方法**: ローカル開発では利用側から`link:`/`file:`で参照する。CIでビルドする段階になったら、git依存（リポジトリはpublicなので認証不要）かnpm公開に切り替える。git依存の場合、ビルド済みの`dist/`をどう用意するか（`prepare`スクリプトでインストール時にビルドする／`dist/`をコミットする）も合わせて決める。GitHub Packagesはpublicなパッケージでもインストールに認証が必要なため避ける
 
 ## コマンド
 
