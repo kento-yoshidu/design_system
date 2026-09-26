@@ -26,9 +26,9 @@ UFO Studio（Tauri）とUFO Playground（WASM）で同じUIを使うための、
 
 作業:
 
-- [ ] ダミーコンポーネントを作り、`src/index.ts`からexportする
-- [ ] `pnpm build`で`dist/`にJS・`style.css`・型定義が出ることを確認する
-- [ ] Studioから表示できることを確認する（手順はStudio側`docs/ROADMAP.md`の「UI共通化」）
+- [x] ダミーコンポーネントを作り、`src/index.ts`からexportする（`src/dummy/Dummy.tsx`）
+- [x] `pnpm build`で`dist/`にJS・`style.css`・型定義が出ることを確認する
+- [x] Studioから表示できることを確認する（手順はStudio側`docs/ROADMAP.md`の「UI共通化」）。`pnpm tauri dev`に加え、`pnpm tauri build`でビルドしたアプリをWindowsにインストールし、`useState`・CSS Modules・CSS変数が効くことを確認済み
 - [ ] Playgroundから表示できることを確認する（手順はPlayground側`docs/ROADMAP.md`の「Phase 1」）
 - [ ] 開発中の反映方法を決める: `dist/`を参照する形だと、変更のたびにビルドし直しが要る。`vite build --watch`を動かしておく運用で困らないかを試す
 - [ ] 本物のコンポーネントを移し終えたら、ダミーコンポーネントは削除する
