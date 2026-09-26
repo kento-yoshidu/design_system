@@ -9,10 +9,10 @@ UFO Studio（Tauri）とUFO Playground（WASM）で同じUIを使うための、
 
 ## Phase 0: プロジェクト初期化
 
-- [ ] Vite（library mode）+ React + TypeScriptでプロジェクトを作成し、`toy_ufdb`などと同様に独立したgitリポジトリとして管理する
-- [ ] `react`/`react-dom`を`peerDependencies`に入れ、ビルド時は`build.rolldownOptions.external`で外す（開発用に`devDependencies`にも入れる）。Vite 8からバンドラーがRolldownになったため、旧名の`rollupOptions`ではなく`rolldownOptions`を使う。JSXの変換先の`react/jsx-runtime`もexternalに含める
-- [ ] 型定義（`.d.ts`）を出力する（`vite-plugin-dts`、または`tsc --emitDeclarationOnly`）
-- [ ] `package.json`の`exports`で、JS本体・型・`style.css`を利用側から参照できるようにする（例: `import "ufodb-design-system/style.css"`）
+- [x] Vite（library mode）+ React + TypeScriptでプロジェクトを作成し、`toy_ufdb`などと同様に独立したgitリポジトリとして管理する
+- [x] `react`/`react-dom`を`peerDependencies`に入れ、ビルド時は`build.rolldownOptions.external`で外す（開発用に`devDependencies`にも入れる）。Vite 8からバンドラーがRolldownになったため、旧名の`rollupOptions`ではなく`rolldownOptions`を使う。JSXの変換先の`react/jsx-runtime`もexternalに含める
+- [x] 型定義（`.d.ts`）を出力する。`tsconfig.build.json`（`tsconfig.app.json`を継承し、`emitDeclarationOnly`で型定義だけを`dist/`に出す）を用意し、`vite build`のあとに`tsc -p tsconfig.build.json`を実行する。`vite build`は最初に`dist/`を空にするため、順番を逆にすると型定義が消える
+- [x] `package.json`の`exports`で、JS本体・型・`style.css`を利用側から参照できるようにする（例: `import "ufodb-design-system/style.css"`）
 - [ ] コンポーネント確認用の開発サーバー（`pnpm dev`）で、ライブラリをビルドせずに表示を確認できるようにする
 
 ## Phase 1: ダミーコンポーネントで疎通確認

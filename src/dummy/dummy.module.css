@@ -1,0 +1,8 @@
+.p {
+  color: var(--attention-color);
+}
+
+.label {
+  color: blue;
+  font-size: 18px;
+}
