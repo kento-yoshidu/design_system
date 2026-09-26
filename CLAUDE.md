@@ -4,19 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-`ufo-design-system`: `ufodb_v0`（Union-Find DB）のGUIクライアントで共通して使うReactコンポーネントとデザイントークンのライブラリ。
+`ufodb-design-system`（リポジトリ: `ufodb_design_system`）: `ufodb_v0`（Union-Find DB）のGUIクライアントで共通して使うReactコンポーネントとデザイントークンのライブラリ。
 
 利用側は次の2つ。どちらも同じ見た目・同じ操作感にするため、UIはこのリポジトリに集約する。
 
-- **UFO Studio**（`toy_ufdb_gui_app`）: Tauri製のデスクトップアプリ。Rust側で`ufodb_v0`を直接呼ぶ
-- **UFO Playground**（`ufo-playground`）: ブラウザだけで動くWebアプリ。`ufodb_v0`をWASMにして呼ぶ
+- **UFO Studio**（`ufodb_studio`）: Tauri製のデスクトップアプリ。Rust側で`ufodb_v0`を直接呼ぶ
+- **UFO Playground**（`ufodb_playground`）: ブラウザだけで動くWebアプリ。`ufodb_v0`をWASMにして呼ぶ
+
+実装計画・進捗のフェーズ分けは`docs/ROADMAP.md`を参照。最初はテスト用のダミーコンポーネントで、StudioとPlaygroundから読み込めるかを確認するところから始める。
 
 ## 設計方針
 
 - **バックエンドに依存しない**: このリポジトリのコンポーネントは、Tauriの`invoke()`もWASMも直接呼ばない。データはprops、操作はコールバック（`onInsert`、`onMerge`など）で受け渡す。Tauri/WASMの呼び出しは利用側アプリの責務
 - **表示は外から変えられるようにする**: アプリ名やロゴなど、StudioとPlaygroundで変わりうるものはハードコードせずpropsで受け取る
 - **`react`/`react-dom`は`peerDependencies`**: 利用側とReactが二重に読み込まれるとhooksが壊れるため、`dependencies`には入れない
-- **スタイル**: CSS Modules + `:root`のCSS変数（デザイントークン）。ビルド後のCSSは利用側で`import "ufo-design-system/style.css"`のように読み込んでもらう
+- **スタイル**: CSS Modules + `:root`のCSS変数（デザイントークン）。ビルド後のCSSは利用側で`import "ufodb-design-system/style.css"`のように読み込んでもらう
 - 当初のコンポーネントとトークンはStudioの`src/components/`・`src/App.css`から切り出したもの。切り出し後はStudioを正とせず、このリポジトリを正とする
 
 ## 未決定事項
@@ -35,8 +37,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 関連リポジトリ
 
 - `toy_ufdb`（`ufodb_v0`本体）: Union-Find DBのコア。このリポジトリからは参照しない
-- `toy_ufdb_gui_app`（UFO Studio）: 利用側。`invoke()`でRustを呼ぶ
-- `ufo-playground`（UFO Playground）: 利用側。WASMを呼ぶ
+- `ufodb_studio`（UFO Studio）: 利用側。`invoke()`でRustを呼ぶ
+- `ufodb_playground`（UFO Playground）: 利用側。WASMを呼ぶ
 
 コンポーネントのpropsを変更すると、Studio・Playgroundの両方に影響する。破壊的変更をするときは、両方の追従が必要になることを明記する。
 
