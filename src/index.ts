@@ -1,1 +1,3 @@
-export { default as App } from "./App";
+import "./styles.css";
+
+export { default as Dummy } from "./dummy/Dummy";

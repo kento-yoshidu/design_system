@@ -32,7 +32,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `pnpm install`
 - `pnpm dev` — コンポーネント確認用の開発サーバー
-- `pnpm build` — Viteのlibrary modeでビルド（`dist/`にJSとCSSを出力）
+- `pnpm build` — 型チェック → Viteのlibrary modeでビルド（`dist/`にJSとCSSを出力）→ `tsc -p tsconfig.build.json`で型定義を`dist/`に出力
 
 ## 関連リポジトリ
 
